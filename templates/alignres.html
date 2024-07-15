@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table with Row Controller</title>
+    <link rel="stylesheet" type="text/css" href="/static/search_result.css">
+    <link rel="stylesheet" type="text/css" href="/static/searchbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="div-main">
+        {% include 'header.html'%}
+    <br/>
+    <form action="search" method="get">
+        <div class="search">
+            <input type="text" class="searchTerm" name="query" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search"></i>
+            </button>
+        </div>
+        
+    </form>
+    <div class="row-controller">
+    </div>
+    <div class="container">
+        <div class="right-div">
+            <h2>Alignment</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Organism</th>
+                        <th>Product</th>
+                        <th> Gene</th>
+                    </tr>
+                </thead>
+                <tbody id="right-table-body">
+                    {% for i in ncbi_data %}
+                    {% for seq in query %}
+                    {% if seq in i.sequence%}
+                    <tr>
+                        <td>{{i.org}}</td>
+                        <td>{{i.product}}</td>
+                        <td><a href="https://www.genome.jp/dbget-bin/www_bfind_sub?mode=bfind&max_hit=1000&locale=en&serv=kegg&dbkey=genes&keywords={{i.gene}}&page=1">{{i.gene}}</td></a>
+                    </tr>
+                </tbody>
+                    {%endif%}
+                    {%endfor%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% include "footer.html" %}
+    </div>
+
+    
+<script src="/static/script.js"></script>
+    
+</body>
+</html> 

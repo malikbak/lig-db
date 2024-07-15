@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table with Row Controller</title>
+    <link rel="stylesheet" type="text/css" href="/static/search_tab.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+    {%include 'header.html'%}
+    <div class="two-column-container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <table id="myTable">
+                <thead>
+                    <tr class="colname">
+                        <th>Organism</th>
+                        <th>Genes</th>
+                        <th>Pathways</th>
+                        <th>Taxonomy</th>
+                        <th>Gene Percentage</th>
+                    </tr>
+                </thead>
+                <tbody id="right-table-body">
+                    {% if d %}   
+                    {% for i in d %}
+                    <tr>
+                        <td><a href="results/{{i.org}}">{{i.org}}</a></td>
+                        <td class="geneN" data-org="{{ i.gene }}">{{i.gene}}</td>
+                        <td>{{i.pathways}}</td>
+                        <td>{{i.taxonomy}}</td>
+                        <td>{{i.Percentage}}</td>
+                        
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+                </tbody>
+                </tbody>
+            </table>
+            
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <br/>
+            <br/>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Organisms</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Substrates</a></li>
+                <li><a href="#">About / Contact</a></li>
+            </ul>
+            <h2>Filters</h2>
+            <h5>Filter by Bacteria</h4>
+            <select id="countriesDropdown" oninput="filterTable()">
+                <option>All</option>
+                {% if d %}   
+                {% for i in d %}
+                <option>{{i.org}}</option>
+                {%endfor%}
+                {%endif%}
+            </select>
+            <h5>Filter by Pathways</h4>
+            <select id="dynamicDropdown" oninput="filterTablef()">
+                <option>All</option>
+            </select>
+            <div id="uniqueValueCount"></div>
+            <button id="countButton">Count Unique Values</button>
+        </div>
+    </div>
+    {% include "footer.html" %}
+<script src="/static/script.js"></script>
+<script src="/static/js/filter.js"></script>
+<script>
+    window.onload = function() {
+      var cells = document.getElementsByClassName('geneN');
+  
+      for (var i = 0; i < cells.length; i++) {
+        var cell = cells[i];
+        var orgValue = cell.getAttribute('data-org');
+        var values = orgValue.split(',').map(function(value) {
+          return value.trim();
+        });
+  
+        cell.innerHTML = ''; // Clear existing content
+  
+        values.forEach(function(value) {
+          var link = document.createElement('a');
+          link.href = 'genes/' + value; // Use the value to create the URL
+          link.textContent = value;
+          cell.appendChild(link);
+          cell.appendChild(document.createTextNode(', ')); // Add comma separator
+        });
+  
+        // Remove last comma separator
+        if (cell.childNodes.length > 0) {
+          cell.removeChild(cell.lastChild);
+        }
+      }
+    };
+  </script>    
+</body>
+</html> 

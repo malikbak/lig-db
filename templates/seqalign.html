@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table with Row Controller</title>
+    <link rel="stylesheet" type="text/css" href="/static/search_result.css">
+    <link rel="stylesheet" type="text/css" href="/static/searchbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/seqalign.css">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/all.min.css">
+    <link rel="stylesheet" href="/static/templatemo-style.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="/static/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="/static/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="div-main">
+        {% include 'header.html'%}
+    <br/>
+    <form action="alignres" method="post">
+        {% csrf_token %}
+        <div class="word-counter-container">
+            <h2>Enter your sequence</h2>
+            <textarea name="user_input" cols="30" rows="10"></textarea>
+            <button class="count-btn">Submit</button>
+        </div>
+    </form>
+    <div class="row-controller">
+    </div>
+    {% include "footer.html" %}
+    </div>
+
+    
+<script src="/static/script.js"></script>
+    
+</body>
+</html> 

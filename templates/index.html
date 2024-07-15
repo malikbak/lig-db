@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="/static/index.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+    {% include "header.html" %}
+ <div class="two-column-container">
+    <!-- Left Column -->
+    <div class="left-column">
+        <h2><i>The Lignin Bacterial Database</i></h2>
+        <p>The Lignin Degradation Database by Bacteria is a comprehensive repository designed to house valuable information on the diverse mechanisms employed by bacteria in the degradation of lignin, a complex and recalcitrant component of plant cell walls. This database is equipped with a range of functionalities to facilitate efficient data retrieval and analysis. Users can employ the alignment feature to compare and contrast the genetic sequences associated with lignin-degrading enzymes, providing insights into the evolutionary relationships and functional diversity of these enzymes across bacterial taxa. The search by taxonomy function allows researchers to explore and extract data specific to bacterial groups, streamlining investigations into the lignin degradation capabilities of particular microbial taxa. Furthermore, the database incorporates advanced tools for data visualization, enabling users to generate phylogenetic trees and heatmaps to discern patterns and relationships within the dataset. This resource serves as a valuable tool for scientists and researchers seeking to unravel the intricacies of lignin degradation pathways in bacteria and contributes to the advancement of bioenergy and bioremediation research.</p>
+        
+        <h2>Bacterial Degradation of Lignin</h2>
+        <p>Lignin, a complex organic polymer found in the cell walls of plants, is a major component of the Earth's biomass. The degradation of lignin by bacteria is a significant process in the carbon cycle and has garnered attention due to its potential applications in biofuel production and environmental remediation. Several bacteria have been identified for their ability to degrade lignin, including Pandoraea sp. B-6, Novosphingobium sp. B-7, various strains of Bacillus sp., Citrobacter freundii, Pseudomonas putida KT2440, and others. These bacteria employ secreted enzyme systems to break down lignin, leading to the release of aromatic compounds and other degradation products. The degradation of lignin by bacteria involves a variety of metabolic pathways and enzymatic reactions, including oxidative and hydroxylation reactions, depolymerization of lignin polymers, demethylation, and opening of aromatic rings. While fungi are generally more efficient in lignin degradation, the study of lignin-degrading bacteria has the potential to contribute to the development of sustainable biotechnologies for lignin valorization and environmental management.</p>
+        
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+        <div class="slider-container">
+            <div class="slider-content">
+                <div class="slide">
+                    <img src="" alt="Image 1">
+                </div>
+            </div>
+    
+            <button class="slider-button prev" onclick="prevSlide">&#10094;</button>
+            <button class="slider-button next" onclick="nextSlide">&#10095;</button>
+        </div>    
+    </div>
+ </div>
+ {% include "footer.html" %}
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ <script>
+    let currentIndex = 0;
+    const slides = document.querySelector('.slider-content');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    }
+
+    function updateSlider() {
+        const translateValue = -currentIndex * 100 + '%';
+        slides.style.transform = 'translateX(' + translateValue + ')';
+    }
+
+    function autoSlide() {
+        nextSlide();
+    }
+
+    // Set interval to automatically slide every 3 seconds (adjust as needed)
+    const intervalId = setInterval(autoSlide, 3000);
+
+    // Pause the slider when the user hovers over it
+    document.querySelector('.slider-container').addEventListener('mouseenter', function () {
+        clearInterval(intervalId);
+    });
+
+    // Resume the slider when the user leaves
+    document.querySelector('.slider-container').addEventListener('mouseleave', function () {
+        intervalId = setInterval(autoSlide, 3000);
+    });
+</script>
+<script>
+    let currentIndexi = 0;
+  
+    function showSlidee(index) {
+      const slides = document.querySelector('.custom-slides');
+      const totalSlides = document.querySelectorAll('.custom-slide').length;
+      currentIndexi = (index + totalSlides) % totalSlides;
+      const translateValue = -currentIndexi * 100 + '%';
+      slides.style.transform = `translateX(${translateValue})`;
+    }
+  
+    function nextSlidee() {
+      showSlidee(currentIndexi + 1);
+    }
+  
+    function prevSlidee() {
+      showSlidee(currentIndexi - 1);
+    }
+  
+    // Automatically slide every 3 seconds
+    setInterval(() => {
+      nextSlide();
+    }, 3000);
+  </script>
+</body>
+</html>

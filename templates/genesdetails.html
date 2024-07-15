@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table with Row Controller</title>
+    <link rel="stylesheet" type="text/css" href="/static/search_tab.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+    {% include "header.html" %}
+    <section class="gene-info section">
+      <h2>{{gene}}</h2>
+      <h3>Pathway</h3>
+      <div class="organism-list">
+        <ul>
+          <!-- Repeat the list of organisms -->
+          {% for i in comR %}
+          <li>{{i.pathways}}</li>
+          {% endfor %}
+          <!-- Add more organisms as needed -->
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="card-item organism">
+          <h3>Organism</h3>
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              {% for i in comR %}
+              <li>{{i.organism}}</li>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+  
+        <div class="card-item accession-number">
+          <h3>Accession Number</h3>
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              {% for i in comR %}
+              <li>{{i.protein_id}}</li>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+  
+        <div class="card-item gene-product">
+          <h3>Gene Product</h3>
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              {% for i in comR %}
+              <li>{{i.product}}</li>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="functions section">
+      <h2>Functions</h2>
+      <div class="info-card">
+        <div class="card-item go-process">
+          <h3>GO Process</h3>
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              {% for i in comR %}
+              <li>{{i.GO_process}}</li>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+  
+        <div class="card-item go-function">
+          <h3>GO Function</h3>
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              {% for i in comR %}
+              <li>{{i.GO_function}}</li>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+  
+        <div class="card-item go-component">
+          <h3>GO Component</h3>
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              {% for i in comR %}
+              <li>{{i.GO_component}}</li>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+  
+        <div class="card-item ec-number">
+          <h3>EC Number</h3>
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              {% for i in comR %}
+              <li>{{i.EC_number}}</li>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="sequence section">
+      <h2>Sequence</h2>
+      <div class="sequence-info">
+        <div class="organism-sequence">
+          <div class="organism-list">
+            <ul>
+              <!-- Repeat the list of organisms -->
+              <h3>>{{gene}}</h3>
+              {% for i in comR %}
+              <p>{{i.translation}}</p>
+              {% endfor %}
+              <!-- Add more organisms as needed -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include "footer.html" %}
+    </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const organismList = document.querySelectorAll(".organism-list ul li");
+    
+      let uniqueOrganisms = new Set();
+      organismList.forEach(function(item) {
+        const organisms = item.textContent.trim().split(", ");
+        let hasInvalid = false;
+        organisms.forEach(function(organism) {
+          const formattedOrganism = organism.trim().toUpperCase(); // Convert to uppercase for case-insensitive comparison
+          const regex = /^(NaN|NA)$/i; // Regular expression to match "NaN" or "NA"
+          if (formattedOrganism !== "" && !uniqueOrganisms.has(formattedOrganism) && !regex.test(formattedOrganism)) {
+            uniqueOrganisms.add(formattedOrganism);
+          } else {
+            hasInvalid = true;
+          }
+        });
+        if (hasInvalid) {
+          item.style.display = "none"; // Hide entire list item with invalid organisms
+        }
+      });
+    });
+    
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      const organismList = document.querySelectorAll(".organism-list p");
+    
+      let uniqueOrganisms = new Set();
+      organismList.forEach(function(item) {
+        const organisms = item.textContent.trim().split(", ");
+        organisms.forEach(function(organism) {
+          if (!uniqueOrganisms.has(organism)) {
+            uniqueOrganisms.add(organism);
+          } else {
+            item.style.display = "none"; // Hide entire list item containing duplicate organisms
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

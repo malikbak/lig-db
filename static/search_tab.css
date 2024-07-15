@@ -1,0 +1,108 @@
+.two-column-container {
+    display: flex;
+    margin: 20px;
+}
+
+.left-column {
+    flex: 30%;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.right-column {
+    flex: 70%;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #07742b;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+/* Custom select styles */
+#countriesDropdown {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Style for the dropdown arrow */
+#countriesDropdown::after {
+    content: '\25BC'; /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+/* Style for the dropdown options */
+#countriesDropdown option {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#countriesDropdown option:hover {
+    background-color: #f0f0f0;
+}
+#dynamicDropdown {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Style for the dropdown arrow */
+#dynamicDropdown::after {
+    content: '\25BC'; /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+/* Custom button styles */
+#countButton {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #07742b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#countButton:hover {
+    background-color: #07742b;
+}
+
+/* Custom div styles */
+#uniqueValueCount {
+    margin-top: 10px;
+    font-size: 16px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/index.css">
+        <link rel="stylesheet" type="text/css" href="/static/add.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+       </head>
+<body>
+    {% include 'header.html'%}
+    <div class="upload-card" style="width:500px; margin:0 auto;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file2" accept=".csv">
+            <label for="file1">Choose File</label>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="upload-card" style="width:500px; margin:0 auto;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file3" accept=".csv">
+            <label for="file1">Choose File</label>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="upload-card" style="width:500px; margin:0 auto;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file4" accept=".csv">
+            <label for="file1">Choose File</label>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="upload-card" style="width:500px; margin:0 auto;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file5" accept=".csv">
+            <label for="file1">Choose File</label>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    {% include "footer.html" %}
+    </div>
+</body>
+</html>

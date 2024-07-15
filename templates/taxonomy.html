@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Table with Row Controller</title>
+    <link rel="stylesheet" type="text/css" href="/static/search_tab.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style>
+        @media print {
+            table {
+            page-break-inside: avoid;
+            }
+            tr {
+            break-inside: avoid;
+            }
+            tbody {
+            display: block;
+            }
+            tbody tr:nth-child(5n + 1) {
+            page-break-before: always;
+            }
+        }
+    </style>
+    <style>
+        .dropdown-container {
+          display: inline-block;
+          margin-right: 20px;
+          width: 200px; /* Fixed width for dropdowns */
+          text-align: left;
+        }
+    
+        select {
+          width: 100%;
+          padding: 8px;
+          margin: 5px;
+        }
+    
+        button {
+          padding: 10px 20px;
+          cursor: pointer;
+        }
+    
+        /* Additional style for button container */
+        .button-container {
+            display: inline-block;
+            margin-right: 20px;
+            width: 200px; /* Fixed width for dropdowns */
+            text-align: left;
+        }
+      </style>
+</head>
+<body>
+    {% include 'header.html'%}
+    <div class="two-column-container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <h2><i>Searh by Taxonomy</i></h2>
+            <p>Discover the intricacies of biodiversity with our advanced search feature! Start by selecting the taxonomic level, from phylum to genus, using intuitive dropdown menus. As you progress through the hierarchy, dynamically populated dropdowns ensure you focus on relevant options at each level. Once you've honed in on a specific taxonomic group, use the final dropdown to choose the percentage of a desired gene within that category. This user-friendly and powerful tool allows you to explore the genetic landscape of diverse organisms with ease, providing a streamlined and comprehensive experience for researchers and enthusiasts alike. Uncover the secrets of nature by combining taxonomy and genomics in a single, accessible search on our database website.</p>
+        
+            <div class="container">
+                <form action="taxonomytbpres" method="get" class="taxonomy-form">
+                <h1></h1>
+                <div class="dropdown-container">
+                  <label for="thrd-dropdown">Select Percentage:</label>
+                  <select id="thrd-dropdown" onchange="filterOptions()" name="percen">
+                  <option value="">None</option>
+                  {% for i in numbers%}
+                  <option value="{{i}}">{{i}}</option>
+                  {%endfor%}
+                  </select>
+                </div>
+                <div class="dropdown-container">
+                    <label for="first-dropdown">Select Level:</label>
+                    <select id="first-dropdown" onchange="filterOptions()">
+                    <option value="">None</option>
+                    <option value="fruits">Phylum</option>
+                    <option value="animals">Class</option>
+                    <option value="colors">Order</option>
+                    <option value="vehicles">Family</option>
+                    <option value="buses">Genus</option>
+                    </select>
+                </div>
+                
+                <div class="dropdown-container">
+                    <label for="second-dropdown">Select Taxonomy:</label>
+                    <select id="second-dropdown" name="phylum">
+                        <option value="">None</option>
+                        {%for i in taxo %}
+                    <option class="fruits" value="{{i.taxonomy2}}">{{i.taxonomy2}}</option>
+                    <option class="animals" value="{{i.taxonomy3}}">{{i.taxonomy3}}</option> <!-- Duplicated option -->
+                    <option class="colors" value="{{i.taxonomy4}}">{{i.taxonomy4}}</option> <!-- Duplicated option -->
+                    <option class="vehicles" value="{{i.taxonomy5}}">{{i.taxonomy4}}</option> <!-- Duplicated option -->
+                    <option class="buses" value="{{i.taxonomy6}}">{{i.taxonomy6}}</option> <!-- Duplicated option -->
+                    {%endfor%}
+                    <!-- Other color options with the class "colors" -->
+                    </select>
+                </div>
+                <div class="button-container">
+                    <h1></h1>
+                <button type="submit">Submit</button>
+                </div>
+            </form>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <br/>
+            <br/>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Organisms</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Substrates</a></li>
+                <li><a href="#">About / Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    {% include "footer.html" %}
+    
+      <script>
+        // Store original options for each category
+        const originalOptions = {
+          fruits: Array.from(document.querySelectorAll('.fruits')),
+          animals: Array.from(document.querySelectorAll('.animals')),
+          colors: Array.from(document.querySelectorAll('.colors')),
+          vehicles: Array.from(document.querySelectorAll('.vehicles')),
+          buses: Array.from(document.querySelectorAll('.buses')),
+        };
+    
+        function filterOptions() {
+          const firstDropdown = document.getElementById('first-dropdown');
+          const secondDropdown = document.getElementById('second-dropdown');
+          const selectedValue = firstDropdown.value;
+    
+          // Reset second dropdown
+          secondDropdown.innerHTML = '';
+    
+          // Get original options based on selected category
+          const options = originalOptions[selectedValue];
+          const uniqueOptions = [];
+    
+          options.forEach(option => {
+            if (!uniqueOptions.includes(option.textContent)) {
+              uniqueOptions.push(option.textContent);
+              const newOption = document.createElement('option');
+              newOption.textContent = option.textContent;
+              secondDropdown.appendChild(newOption);
+            }
+          });
+        }
+      </script>
+</body>
+</html>
